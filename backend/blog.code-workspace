@@ -1,0 +1,195 @@
+{
+	"folders": [
+		{
+			"name": "blog (raíz)",
+			"path": ".."
+		}
+	],
+	"settings": {
+		// ── Python / Django ──────────────────────────────────────────────
+		// Pylance resuelve `core`, `manage`, etc. desde backend/
+		"python.analysis.extraPaths": ["${workspaceFolder}/backend"],
+		"python.analysis.typeCheckingMode": "basic",
+		"python.analysis.autoImportCompletions": true,
+		"python.terminal.activateEnvironment": true,
+
+		// Black + isort + flake8 (misma línea máxima y perfil compatible)
+		"black-formatter.args": ["--line-length", "88"],
+		"isort.args": ["--profile", "black"],
+		"flake8.args": [
+			"--max-line-length=88",
+			"--extend-ignore=E203,W503",
+			"--exclude=migrations,static,__pycache__"
+		],
+		"[python]": {
+			"editor.defaultFormatter": "ms-python.black-formatter",
+			"editor.formatOnSave": true,
+			"editor.codeActionsOnSave": {
+				"source.organizeImports": "explicit"
+			},
+			"editor.rulers": [88]
+		},
+
+		// Plantillas de Django
+		"files.associations": {
+			"**/templates/**/*.html": "django-html",
+			"**/templates/**/*.txt": "django-txt",
+			"dockerfile": "dockerfile",
+			"docker-compose*.yml": "dockercompose",
+			"docker-compose*.yaml": "dockercompose",
+			".env*": "dotenv"
+		},
+		"emmet.includeLanguages": {
+			"django-html": "html"
+		},
+		"[django-html]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"editor.tabSize": 2
+		},
+
+		// ── Frontend (Next.js) / JSON / YAML / Markdown ──────────────────
+		"[javascript][javascriptreact][typescript][typescriptreact][json][jsonc][yaml][markdown]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"editor.formatOnSave": true
+		},
+		"[yaml]": {
+			"editor.tabSize": 2
+		},
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": "explicit"
+		},
+		"eslint.workingDirectories": [{ "mode": "auto" }],
+		"tailwindCSS.includeLanguages": {
+			"django-html": "html"
+		},
+
+		// ── Editor general ───────────────────────────────────────────────
+		"editor.bracketPairColorization.enabled": true,
+		"editor.guides.bracketPairs": "active",
+		"editor.linkedEditing": true,
+		"files.trimTrailingWhitespace": true,
+		"files.insertFinalNewline": true,
+		"files.eol": "\n",
+		"files.encoding": "utf8",
+
+		// ── Ruido fuera del explorador y de la búsqueda ──────────────────
+		"files.exclude": {
+			"**/__pycache__": true,
+			"**/*.pyc": true,
+			"**/.pytest_cache": true,
+			"**/.mypy_cache": true
+		},
+		"search.exclude": {
+			"**/static": true,
+			"**/.dbdata": true,
+			"**/node_modules": true,
+			"**/.next": true,
+			"**/db.sqlite3": true
+		},
+		"files.watcherExclude": {
+			"**/.dbdata/**": true,
+			"**/node_modules/**": true,
+			"**/.next/**": true,
+			"**/__pycache__/**": true
+		},
+
+		// ── Git / Docker ─────────────────────────────────────────────────
+		"git.autofetch": true,
+		"git.confirmSync": false,
+		"git.openRepositoryInParentFolders": "always",
+		"gitlens.codeLens.enabled": false,
+		"docker.compose.detached": true
+	},
+	"extensions": {
+		"recommendations": [
+			// Python y Django
+			"ms-python.python",
+			"ms-python.vscode-pylance",
+			"ms-python.black-formatter",
+			"ms-python.isort",
+			"ms-python.flake8",
+			"batisteo.vscode-django",
+
+			// Docker y entorno
+			"ms-azuretools.vscode-docker",
+			"ms-vscode-remote.remote-containers",
+			"mikestead.dotenv",
+			"redhat.vscode-yaml",
+
+			// Base de datos (Postgres + Redis) y pruebas de API
+			"cweijan.vscode-database-client2",
+			"rangav.vscode-thunder-client",
+
+			// Frontend Next.js
+			"dbaeumer.vscode-eslint",
+			"esbenp.prettier-vscode",
+			"bradlc.vscode-tailwindcss",
+			"dsznajder.es7-react-js-snippets",
+
+			// General
+			"editorconfig.editorconfig",
+			"eamodio.gitlens",
+			"mhutchie.git-graph",
+			"christian-kohler.path-intellisense"
+		],
+		"unwantedRecommendations": [
+			// Chocan con Black + flake8 (formatean / avisan por duplicado)
+			"ms-python.autopep8",
+			"ms-python.pylint"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Docker: levantar (build)",
+				"type": "shell",
+				"command": "docker compose up --build -d",
+				"options": { "cwd": "${workspaceFolder}/backend" },
+				"problemMatcher": []
+			},
+			{
+				"label": "Docker: bajar",
+				"type": "shell",
+				"command": "docker compose down",
+				"options": { "cwd": "${workspaceFolder}/backend" },
+				"problemMatcher": []
+			},
+			{
+				"label": "Docker: logs del backend",
+				"type": "shell",
+				"command": "docker compose logs -f backend",
+				"options": { "cwd": "${workspaceFolder}/backend" },
+				"problemMatcher": []
+			},
+			{
+				"label": "Django: makemigrations",
+				"type": "shell",
+				"command": "docker compose exec backend python manage.py makemigrations",
+				"options": { "cwd": "${workspaceFolder}/backend" },
+				"problemMatcher": []
+			},
+			{
+				"label": "Django: migrate",
+				"type": "shell",
+				"command": "docker compose exec backend python manage.py migrate",
+				"options": { "cwd": "${workspaceFolder}/backend" },
+				"problemMatcher": []
+			},
+			{
+				"label": "Django: createsuperuser",
+				"type": "shell",
+				"command": "docker compose exec backend python manage.py createsuperuser",
+				"options": { "cwd": "${workspaceFolder}/backend" },
+				"problemMatcher": []
+			},
+			{
+				"label": "Django: shell",
+				"type": "shell",
+				"command": "docker compose exec backend python manage.py shell",
+				"options": { "cwd": "${workspaceFolder}/backend" },
+				"problemMatcher": []
+			}
+		]
+	}
+}

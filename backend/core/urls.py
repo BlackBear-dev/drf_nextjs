@@ -20,10 +20,6 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-
-from .views import TestView
-
 urlpatterns = [
-    path("test/", TestView.as_view(), name="test"),
     path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.STATIC_ROOT)
