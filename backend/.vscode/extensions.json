@@ -28,10 +28,5 @@
 		// Chocan con Black + flake8 (formatean / avisan por duplicado)
 		"ms-python.autopep8",
 		"ms-python.pylint",
-
-		// Frontend: no aplican en el backend
-		"dbaeumer.vscode-eslint",
-		"bradlc.vscode-tailwindcss",
-		"dsznajder.es7-react-js-snippets"
 	]
 }

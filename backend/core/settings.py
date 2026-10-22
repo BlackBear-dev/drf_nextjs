@@ -1,6 +1,6 @@
 import os
-
 from pathlib import Path
+
 import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,6 +39,7 @@ PROJECT_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "channels",
+    "django_ckeditor_5",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
@@ -126,8 +127,9 @@ USE_TZ = True
 STATIC_LOCATION = "static"
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, STATIC_LOCATION)
-MEDIA_URL = "media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
+MEDIA_LOCATION = "media"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_LOCATION)
 
 
 # Email
@@ -162,3 +164,36 @@ CACHES = {
     }
 }
 CHANNELS_ALLOWED_ORIGINS = "http://localhost:3000"
+
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "toolbar": [
+            "heading",
+            "|",
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough",
+            "|",
+            "link",
+            "blockQuote",
+            "code",
+            "codeBlock",
+            "|",
+            "bulletedList",
+            "numberedList",
+            "outdent",
+            "indent",
+            "|",
+            "insertTable",
+            "imageUpload",
+            "mediaEmbed",
+            "|",
+            "undo",
+            "redo",
+            "sourceEditing",
+        ],
+        "autoParagraph": False,
+    },
+}
+CKEDITOR_UPLOAD_PATH = "media/"
