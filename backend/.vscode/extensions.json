@@ -3,36 +3,35 @@
 		// Python y Django
 		"ms-python.python",
 		"ms-python.vscode-pylance",
+		"ms-python.debugpy",
 		"ms-python.black-formatter",
 		"ms-python.isort",
 		"ms-python.flake8",
 		"batisteo.vscode-django",
 
-		// Docker y entorno
+		// Docker y entorno (docker-compose, dockerfile, .env)
 		"ms-azuretools.vscode-docker",
 		"ms-vscode-remote.remote-containers",
 		"mikestead.dotenv",
 		"redhat.vscode-yaml",
 
-		// Base de datos (Postgres + Redis) y pruebas de API
+		// Base de datos (Postgres + Redis) y pruebas de la API (DRF)
 		"cweijan.vscode-database-client2",
 		"rangav.vscode-thunder-client",
-
-		// Frontend Next.js
-		"dbaeumer.vscode-eslint",
-		"esbenp.prettier-vscode",
-		"bradlc.vscode-tailwindcss",
-		"dsznajder.es7-react-js-snippets",
 
 		// General
 		"editorconfig.editorconfig",
 		"eamodio.gitlens",
-		"mhutchie.git-graph",
 		"christian-kohler.path-intellisense"
 	],
 	"unwantedRecommendations": [
 		// Chocan con Black + flake8 (formatean / avisan por duplicado)
 		"ms-python.autopep8",
-		"ms-python.pylint"
+		"ms-python.pylint",
+
+		// Frontend: no aplican en el backend
+		"dbaeumer.vscode-eslint",
+		"bradlc.vscode-tailwindcss",
+		"dsznajder.es7-react-js-snippets"
 	]
 }
